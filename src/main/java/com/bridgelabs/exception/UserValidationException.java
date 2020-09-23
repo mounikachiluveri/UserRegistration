@@ -1,15 +1,14 @@
 package com.bridgelabs.exception;
 
 public class UserValidationException extends Exception {
+    public ExceptionType exceptionType;
+
     public enum ExceptionType {
-        INVALID_PASSWORD, INVALID_EMAILid;
+        INVALID_PASSWORD, INVALID_EMAILID, INVALID_FIRSTNAME, INVALID_LASTNAME, INVALID_PHONENUMBER;
     }
 
-    public ExceptionType type;
-
-    public UserValidationException(String message, ExceptionType type) {
+    public UserValidationException(ExceptionType exceptionType, String message) {
         super(message);
-        this.type = type;
+        this.exceptionType = exceptionType;
     }
-
 }

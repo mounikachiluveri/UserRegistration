@@ -1,4 +1,5 @@
 import com.bridgelabs.dao.UserRegistratioDAOImplDB;
+import com.bridgelabs.exception.UserValidationException;
 import com.bridgelabs.model.User;
 import com.bridgelabs.utility.UserInputOutput;
 import com.bridgelabs.utility.UserInput;
@@ -15,17 +16,22 @@ public class UserServiceTest {
     }
 
     @Test
-    public void givenValidUser_WhenRegister_ShouldReturnSuccessMessage() {
+    public void givenValidUser_WhenRegister_ShouldReturnSuccessMessage() throws UserValidationException {
         User user = new User("Mounika", "Chiluveri", "2A@sdfghj", "chiluveri.mounika@gmail.com", "9985241801");
         String message = userInputOutput.validateField(user);
         Assert.assertEquals("Registration SuccessFul", message);
     }
 
     @Test
-    public void givenFirstNameNotProper_WhenRegister_ShouldReturnUnSuccessMessage()  {
-        User user = new User("mounika", "Chiluveri", "2A@sdfghj", "chiluveri.mounika@gmail.com", "9985241801");
-        String message = userInputOutput.validateField(user);
-        Assert.assertEquals("Registration UnSuccessFull", message);
+    public void givenFirstNameNotProper_WhenRegister_ShouldThrowException() {
+        try {
+            User user = new User("mounika", "Chiluveri", "2A@sdfghj", "chiluveri.mounika@gmail.com", "9985241801");
+            userInputOutput.validateField(user);
+        } catch (UserValidationException e) {
+            Assert.assertEquals(UserValidationException.ExceptionType.INVALID_FIRSTNAME, e.exceptionType);
+        }
     }
 }
+
+
 

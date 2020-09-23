@@ -1,5 +1,6 @@
 package com.bridgelabs.utility;
 
+import com.bridgelabs.exception.UserValidationException;
 import com.bridgelabs.model.User;
 import java.util.*;
 import java.util.regex.Matcher;
@@ -101,21 +102,24 @@ public class UserInputOutput {
         return matchString.matches();
     }
 
-    public static String validateField(User user) {
+    public static String validateField(User user) throws UserValidationException {
         if (!UserInputOutput.stringChecker(user.getFirstName())) {
-            return "Registration UnSuccessFull";
+            throw new UserValidationException(UserValidationException.ExceptionType.INVALID_FIRSTNAME, "Invalid FirstName");
         }
         if (!UserInputOutput.stringChecker(user.getLastName())) {
-            return "Registration UnSuccessFul";
+            throw new UserValidationException(UserValidationException.ExceptionType.INVALID_LASTNAME, "Invalid LastName");
+
         }
         if (!UserInputOutput.passwordChecker(user.getPassword())) {
-            return "Registration UnSuccessFul";
+            throw new UserValidationException(UserValidationException.ExceptionType.INVALID_PASSWORD, "Invalid password");
+
         }
         if (!UserInputOutput.emailChecker(user.getEmailId())) {
-            return "Registration UnSuccessFul";
+            throw new UserValidationException(UserValidationException.ExceptionType.INVALID_EMAILID, "Invalid email");
         }
+
         if (!UserInputOutput.phoneNumberChecker(user.getPhoneNumber())) {
-            return "Registration UnSuccessFul";
+            throw new UserValidationException(UserValidationException.ExceptionType.INVALID_PHONENUMBER, "Invalid phoneNumber");
         }
         return "Registration SuccessFul";
     }
