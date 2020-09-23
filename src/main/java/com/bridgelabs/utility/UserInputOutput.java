@@ -1,11 +1,11 @@
 package com.bridgelabs.utility;
 
-import com.bridgelabs.model.Person;
+import com.bridgelabs.model.User;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class PersonInputOutput {
+public class UserInputOutput {
 
     public static String firstName;
     public static String emailId;
@@ -13,68 +13,68 @@ public class PersonInputOutput {
     public static String lastName;
     public static String password;
 
-    public static Person getPersonName() {
-        Person person = new Person();
+    public static User getUserName() {
+        User user = new User();
         String firstAndLastName;
         System.out.println("Enter the First Name");
         firstName = UserInput.getString();
-        while (!PersonInputOutput.stringChecker(firstName)) {
+        while (!UserInputOutput.stringChecker(firstName)) {
             System.out.println("Enter valid the first name");
             firstName = UserInput.getString();
         }
-        person.setFirstName(firstName);
+        user.setFirstName(firstName);
         System.out.println("Enter the Last Name");
         lastName = UserInput.getString();
-        while (!PersonInputOutput.stringChecker(lastName)) {
+        while (!UserInputOutput.stringChecker(lastName)) {
             System.out.println("Enter valid the last name");
             lastName = UserInput.getString();
         }
-        person.setLastName(lastName);
-        firstAndLastName = person.getFirstName() + person.getLastName();
-        return person;
+        user.setLastName(lastName);
+        firstAndLastName = user.getFirstName() + user.getLastName();
+        return user;
     }
 
-    public static Person addPersonRecord(Person person) {
+    public static User addUserRecord(User user) {
         try {
             long length;
             System.out.println("Enter the Password");
             password = UserInput.getString();
-            while (!PersonInputOutput.passwordChecker(password)) {
+            while (!UserInputOutput.passwordChecker(password)) {
                 System.out.println("Enter valid the Password");
                 password = UserInput.getString();
             }
-            person.setPassword(password);
+            user.setPassword(password);
             System.out.println("Enter the emailId");
             emailId = UserInput.getString();
-            while (!PersonInputOutput.emailChecker(emailId)) {
+            while (!UserInputOutput.emailChecker(emailId)) {
                 System.out.println("Enter the valid emailId");
                 emailId = UserInput.getString();
             }
-            person.setEmailId(emailId);
+            user.setEmailId(emailId);
             System.out.println("Enter the 10 Digit Mobile Number");
             phoneNumber = UserInput.getString();
-            while (!PersonInputOutput.phoneNumberChecker(phoneNumber)) {
+            while (!UserInputOutput.phoneNumberChecker(phoneNumber)) {
                 System.out.println("Enter the valid phone number");
                 phoneNumber = UserInput.getString();
             }
-            person.setPhoneNumber(phoneNumber);
+            user.setPhoneNumber(phoneNumber);
         } catch (NullPointerException | InputMismatchException e) {
             System.out.println(e);
         }
-        return person;
+        return user;
     }
 
-    public static Person loginPerson() {
-        Person person = new Person();
+    public static User loginUser() {
+        User user = new User();
         try {
             System.out.println("Enter the emailId");
-            person.setEmailId(UserInput.getString());
+            user.setEmailId(UserInput.getString());
             System.out.println("Enter the Password");
-            person.setPassword(UserInput.getString());
+            user.setPassword(UserInput.getString());
         } catch (NullPointerException | InputMismatchException e) {
             System.out.println(e);
         }
-        return person;
+        return user;
     }
 
     public static boolean stringChecker(String checkString) {
@@ -101,23 +101,23 @@ public class PersonInputOutput {
         return matchString.matches();
     }
 
-    public static String validateField(Person person) {
-        if (!PersonInputOutput.stringChecker(person.getFirstName())) {
-            return "unsuccessfull";
+    public static String validateField(User user) {
+        if (!UserInputOutput.stringChecker(user.getFirstName())) {
+            return "Registration UnSuccessFull";
         }
-        if (!PersonInputOutput.stringChecker(person.getLastName())) {
-            return "unsuccessfull";
+        if (!UserInputOutput.stringChecker(user.getLastName())) {
+            return "Registration UnSuccessFul";
         }
-        if (!PersonInputOutput.passwordChecker(person.getPassword())) {
-            return "unsuccessfull";
+        if (!UserInputOutput.passwordChecker(user.getPassword())) {
+            return "Registration UnSuccessFul";
         }
-        if (!PersonInputOutput.emailChecker(person.getEmailId())) {
-            return "unsuccessfull";
+        if (!UserInputOutput.emailChecker(user.getEmailId())) {
+            return "Registration UnSuccessFul";
         }
-        if (!PersonInputOutput.phoneNumberChecker(person.getPhoneNumber())) {
-            return "unsuccessfull";
+        if (!UserInputOutput.phoneNumberChecker(user.getPhoneNumber())) {
+            return "Registration UnSuccessFul";
         }
-        return "Successfull";
+        return "Registration SuccessFul";
     }
 }
 

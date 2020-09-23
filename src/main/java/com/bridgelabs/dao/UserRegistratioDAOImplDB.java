@@ -1,26 +1,28 @@
 package com.bridgelabs.dao;
 
-import com.bridgelabs.model.Person;
+import com.bridgelabs.model.User;
 import com.bridgelabs.repositery.UserRepo;
+
 import java.sql.*;
-import static com.bridgelabs.utility.PersonInputOutput.*;
+
+import static com.bridgelabs.utility.UserInputOutput.*;
 
 public class UserRegistratioDAOImplDB implements IUserRegistationDAO {
-    public static final String INSERT_PERSON_QUERY = "insert into person( first_name, last_name, password, emailId, phone_number ) values (?,?,?,?,?)";
-    private static final String SELECT_PERSON_QUERY = "select * from person";
-    private static final String QUERY = "select count(*) AS total from person where first_name = ? and last_name = ?";
-    private static final String UPDATE_PERSON = "Update person set password = ?, emailId = ?, phone_number = ? where first_name = ? and last_name = ?";
-    private static final String DELETE_PERSON = "delete from person where first_name = ? and last_name = ?";
+    public static final String INSERT_User_QUERY = "insert into User( first_name, last_name, password, emailId, phone_number ) values (?,?,?,?,?)";
+    private static final String SELECT_User_QUERY = "select * from User";
+    private static final String QUERY = "select count(*) AS total from User where first_name = ? and last_name = ?";
+    private static final String UPDATE_User = "Update User set password = ?, emailId = ?, phone_number = ? where first_name = ? and last_name = ?";
+    private static final String DELETE_User = "delete from User where first_name = ? and last_name = ?";
 
-    public void addPerson(Person person) {
+    public void addUser(User user) {
         try (Connection con = UserRepo.getConnection();
-             PreparedStatement stmt = con.prepareStatement(INSERT_PERSON_QUERY)) {
+             PreparedStatement stmt = con.prepareStatement(INSERT_User_QUERY)) {
             int counter = 1;
-            stmt.setString(counter++, person.getFirstName());
-            stmt.setString(counter++, person.getLastName());
-            stmt.setString(counter++, person.getPassword());
-            stmt.setString(counter++, person.getEmailId());
-            stmt.setString(counter, person.getPhoneNumber());
+            stmt.setString(counter++, user.getFirstName());
+            stmt.setString(counter++, user.getLastName());
+            stmt.setString(counter++, user.getPassword());
+            stmt.setString(counter++, user.getEmailId());
+            stmt.setString(counter, user.getPhoneNumber());
             stmt.executeUpdate();
             System.out.println("Registration successfully");
         } catch (SQLException e) {
@@ -29,15 +31,15 @@ public class UserRegistratioDAOImplDB implements IUserRegistationDAO {
         }
     }
 
-    public void editPerson(Person person) {
+    public void editUser(User user) {
         try (Connection con = UserRepo.getConnection();
-             PreparedStatement stmt = con.prepareStatement(UPDATE_PERSON)) {
+             PreparedStatement stmt = con.prepareStatement(UPDATE_User)) {
             int counter = 1;
-            stmt.setString(counter++, person.getPassword());
-            stmt.setString(counter++, person.getEmailId());
-            stmt.setString(counter++, person.getPhoneNumber());
-            stmt.setString(counter++, person.getFirstName());
-            stmt.setString(counter, person.getLastName());
+            stmt.setString(counter++, user.getPassword());
+            stmt.setString(counter++, user.getEmailId());
+            stmt.setString(counter++, user.getPhoneNumber());
+            stmt.setString(counter++, user.getFirstName());
+            stmt.setString(counter, user.getLastName());
             stmt.executeUpdate();
             System.out.println("Record Updated successfully");
         } catch (SQLException e) {
@@ -45,13 +47,13 @@ public class UserRegistratioDAOImplDB implements IUserRegistationDAO {
         }
     }
 
-    public int findByFirstNameAndLastName(Person person) {
+    public int findByFirstNameAndLastName(User user) {
         int count = 0;
         try (Connection con = UserRepo.getConnection();
              PreparedStatement stmt = con.prepareStatement(QUERY)) {
             int counter = 1;
-            stmt.setString(counter++, person.getFirstName());
-            stmt.setString(counter, person.getLastName());
+            stmt.setString(counter++, user.getFirstName());
+            stmt.setString(counter, user.getLastName());
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 count = rs.getInt("total");
@@ -63,12 +65,12 @@ public class UserRegistratioDAOImplDB implements IUserRegistationDAO {
     }
 
     @Override
-    public void deletePerson(Person person) {
+    public void deleteUser(User user) {
         try (Connection con = UserRepo.getConnection();
-             PreparedStatement stmt = con.prepareStatement(DELETE_PERSON)) {
+             PreparedStatement stmt = con.prepareStatement(DELETE_User)) {
             int counter = 1;
-            stmt.setString(counter++, person.getFirstName());
-            stmt.setString(counter, person.getLastName());
+            stmt.setString(counter++, user.getFirstName());
+            stmt.setString(counter, user.getLastName());
             stmt.executeUpdate();
             System.out.println("Record deleted successfully");
         } catch (SQLException e) {
@@ -77,16 +79,16 @@ public class UserRegistratioDAOImplDB implements IUserRegistationDAO {
     }
 
     @Override
-    public void loginPerson(Person person) {
+    public void loginUser(User user) {
         try (Connection con = UserRepo.getConnection();
-             PreparedStatement stmt = con.prepareStatement(SELECT_PERSON_QUERY)) {
+             PreparedStatement stmt = con.prepareStatement(SELECT_User_QUERY)) {
             ResultSet rs = stmt.executeQuery();
-            String emailIdt = null;
-            String passwordt = null;
+            String databaseEmail;
+            String databasePassword;
             while (rs.next()) {
-                emailIdt = rs.getString("emailId");
-                passwordt = rs.getString("password");
-                if ((person.getEmailId().equals(emailIdt)) && (person.getPassword().equals(passwordt))) {
+                databaseEmail = rs.getString("emailId");
+                databasePassword = rs.getString("password");
+                if ((user.getEmailId().equals(databaseEmail)) && (user.getPassword().equals(databasePassword))) {
                     System.out.println("login successfully");
                     break;
                 }

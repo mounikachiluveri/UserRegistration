@@ -1,17 +1,13 @@
 package com.bridgelabs.dao;
 
-import com.bridgelabs.model.Person;
+import com.bridgelabs.model.User;
 
 public interface IUserRegistationDAO {
-    void editPerson(Person person);
-
-    void addPerson(Person person);
-
-    int findByFirstNameAndLastName(Person person);
-
-    void deletePerson(Person person);
-
-    void loginPerson(Person person);
+    void editUser(User user);
+    void addUser(User user);
+    int findByFirstNameAndLastName(User user);
+    void deleteUser(User user);
+    void loginUser(User user);
 }
 
 

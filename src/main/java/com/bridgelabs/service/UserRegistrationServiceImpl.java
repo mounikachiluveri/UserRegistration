@@ -1,7 +1,7 @@
 package com.bridgelabs.service;
 
 import com.bridgelabs.dao.IUserRegistationDAO;
-import com.bridgelabs.model.Person;
+import com.bridgelabs.model.User;
 
 public class UserRegistrationServiceImpl implements IUserRegistrationService {
     private final IUserRegistationDAO iUserRegistationDAO;
@@ -12,31 +12,28 @@ public class UserRegistrationServiceImpl implements IUserRegistrationService {
     }
 
     @Override
-    public void addPerson(Person person) {
-
-        this.iUserRegistationDAO.addPerson(person);
+    public void addUser(User user) {
+        this.iUserRegistationDAO.addUser(user);
     }
 
     @Override
-    public void editPerson(Person person) {
-
-        this.iUserRegistationDAO.editPerson(person);
+    public void editUser(User user) {
+        this.iUserRegistationDAO.editUser(user);
     }
 
     @Override
-    public void deletePerson(Person person) {
-
-        this.iUserRegistationDAO.deletePerson(person);
+    public void deleteUser(User user) {
+        this.iUserRegistationDAO.deleteUser(user);
     }
 
     @Override
-    public int findByFirstNameAndLastName(Person person) {
-        return this.iUserRegistationDAO.findByFirstNameAndLastName(person);
+    public int findByFirstNameAndLastName(User user) {
+        return this.iUserRegistationDAO.findByFirstNameAndLastName(user);
     }
-    @Override
-    public void loginPerson(Person person) {
 
-        this.iUserRegistationDAO.loginPerson(person);
+    @Override
+    public void loginUser(User user) {
+        this.iUserRegistationDAO.loginUser(user);
     }
 }
 

@@ -1,11 +1,11 @@
 package com.bridgelabs.service;
 
-import com.bridgelabs.model.Person;
+import com.bridgelabs.model.User;
 
 public interface IUserRegistrationService {
-    int findByFirstNameAndLastName(Person person);
-    void addPerson(Person person);
-    void editPerson(Person person);
-    void deletePerson(Person person);
-    void loginPerson(Person person);
+    int findByFirstNameAndLastName(User user);
+    void addUser(User user);
+    void editUser(User user);
+    void deleteUser(User user);
+    void loginUser(User user);
 }

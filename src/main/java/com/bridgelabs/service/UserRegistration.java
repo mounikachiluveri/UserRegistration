@@ -1,8 +1,8 @@
 package com.bridgelabs.service;
 
 import com.bridgelabs.dao.UserRegistratioDAOImplDB;
-import com.bridgelabs.model.Person;
-import com.bridgelabs.utility.PersonInputOutput;
+import com.bridgelabs.model.User;
+import com.bridgelabs.utility.UserInputOutput;
 import com.bridgelabs.utility.UserInput;
 
 public class UserRegistration {
@@ -16,32 +16,31 @@ public class UserRegistration {
             int select = UserInput.getNumber();
             switch (select) {
                 case 1:
-                    Person personAdd = PersonInputOutput.getPersonName();
-                    personAdd = PersonInputOutput.addPersonRecord(personAdd);
-                    iUserRegistrationService.addPerson(personAdd);
-
+                    User userAdd = UserInputOutput.getUserName();
+                    userAdd = UserInputOutput.addUserRecord(userAdd);
+                    iUserRegistrationService.addUser(userAdd);
                     break;
                 case 2:
-                    Person personEdit = PersonInputOutput.getPersonName();
-                    if (iUserRegistrationService.findByFirstNameAndLastName(personEdit) == 0) {
+                    User userEdit = UserInputOutput.getUserName();
+                    if (iUserRegistrationService.findByFirstNameAndLastName(userEdit) == 0) {
                         System.out.println("No Data Found");
                     } else {
-                        personEdit = PersonInputOutput.addPersonRecord(personEdit);
-                        iUserRegistrationService.editPerson(personEdit);
+                        userEdit = UserInputOutput.addUserRecord(userEdit);
+                        iUserRegistrationService.editUser(userEdit);
                     }
                     break;
 
                 case 3:
-                    Person personDelete = PersonInputOutput.getPersonName();
-                    if (iUserRegistrationService.findByFirstNameAndLastName(personDelete) == 0) {
+                    User userDelete = UserInputOutput.getUserName();
+                    if (iUserRegistrationService.findByFirstNameAndLastName(userDelete) == 0) {
                         System.out.println("No Data Found");
                     } else {
-                        iUserRegistrationService.deletePerson(personDelete);
+                        iUserRegistrationService.deleteUser(userDelete);
                     }
                     break;
                 case 4:
-                    Person personLogin = PersonInputOutput.loginPerson();
-                    iUserRegistrationService.loginPerson(personLogin);
+                    User userLogin = UserInputOutput.loginUser();
+                    iUserRegistrationService.loginUser(userLogin);
             }
             break;
         }

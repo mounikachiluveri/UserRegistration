@@ -1,13 +1,13 @@
 package com.bridgelabs.model;
 
-public class Person {
+public class User {
     private String firstName;
     private String lastName;
     private String password;
     private String emailId;
     private String phoneNumber;
 
-    public Person(String firstName, String lastName, String password, String emailId, String phoneNumber) {
+    public User(String firstName, String lastName, String password, String emailId, String phoneNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
@@ -15,7 +15,7 @@ public class Person {
         this.phoneNumber = phoneNumber;
     }
 
-    public Person() {
+    public User() {
     }
 
     public String getFirstName() {
@@ -77,7 +77,7 @@ public class Person {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Person other = (Person) obj;
+        User other = (User) obj;
         if (firstName == null) {
             if (other.firstName != null)
                 return false;
