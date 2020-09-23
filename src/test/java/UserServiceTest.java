@@ -31,6 +31,16 @@ public class UserServiceTest {
             Assert.assertEquals(UserValidationException.ExceptionType.INVALID_FIRSTNAME, e.exceptionType);
         }
     }
+
+    @Test
+    public void givenLastNameNotProper_WhenRegister_ShouldThrowException() {
+        try {
+            User user = new User("Mounika", "chiluveri", "2A@sdfghj", "chiluveri.mounika@gmail.com", "9985241801");
+            userInputOutput.validateField(user);
+        } catch (UserValidationException e) {
+            Assert.assertEquals(UserValidationException.ExceptionType.INVALID_LASTNAME, e.exceptionType);
+        }
+    }
 }
 
 
