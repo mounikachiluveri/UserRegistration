@@ -41,6 +41,16 @@ public class UserServiceTest {
             Assert.assertEquals(UserValidationException.ExceptionType.INVALID_LASTNAME, e.exceptionType);
         }
     }
+
+    @Test
+    public void givenPasswordNotProper_WhenRegister_ShouldThrowException() {
+        try {
+            User user = new User("Mounika", "Chiluveri", "vbn@sdfghj", "chiluveri.mounika@gmail.com", "9985241801");
+            userInputOutput.validateField(user);
+        } catch (UserValidationException e) {
+            Assert.assertEquals(UserValidationException.ExceptionType.INVALID_PASSWORD, e.exceptionType);
+        }
+    }
 }
 
 
