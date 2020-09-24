@@ -12,12 +12,8 @@ public class UserInput {
     public static String getString() {
         return scanner.next();
     }
-
-    public static String getFirst() {
-        return scanner.next();
-    }
-
-    public static long getLong() {
-        return scanner.nextLong();
-    }
 }
+
+
+
+

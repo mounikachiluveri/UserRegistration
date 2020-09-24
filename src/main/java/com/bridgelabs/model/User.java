@@ -1,11 +1,11 @@
 package com.bridgelabs.model;
 
 public class User {
-    private String firstName;
-    private String lastName;
-    private String password;
-    private String emailId;
-    private String phoneNumber;
+    public String firstName;
+    public String lastName;
+    public String password;
+    public String emailId;
+    public String phoneNumber;
 
     public User(String firstName, String lastName, String password, String emailId, String phoneNumber) {
         this.firstName = firstName;
