@@ -19,4 +19,10 @@ public class UserServiceTest
         boolean result = registration.validateInput("Mounika",UserRegistrationValidator.ValidatePattern.NAME);
         Assert.assertTrue(result);
     }
+    @Test
+    public void givenLastName_whenProper_ReturnTrue() {
+        UserRegistrationValidator registration=new UserRegistrationValidator();
+        boolean result = registration.validateInput("Chiluveri",UserRegistrationValidator.ValidatePattern.NAME);
+        Assert.assertTrue(result);
+    }
 }
